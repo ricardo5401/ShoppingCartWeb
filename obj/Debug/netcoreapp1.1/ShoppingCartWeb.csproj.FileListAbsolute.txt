@@ -18,3 +18,12 @@
 /home/ricardo/Development/asp-net/ShoppingCartWeb/obj/Debug/netcoreapp1.1/ShoppingCartWeb.AssemblyInfo.cs
 /home/ricardo/Development/asp-net/ShoppingCartWeb/obj/Debug/netcoreapp1.1/ShoppingCartWeb.dll
 /home/ricardo/Development/asp-net/ShoppingCartWeb/obj/Debug/netcoreapp1.1/ShoppingCartWeb.pdb
+C:\Development\ShoppingCartWeb\bin\Debug\netcoreapp1.1\ShoppingCartWeb.deps.json
+C:\Development\ShoppingCartWeb\bin\Debug\netcoreapp1.1\ShoppingCartWeb.runtimeconfig.json
+C:\Development\ShoppingCartWeb\bin\Debug\netcoreapp1.1\ShoppingCartWeb.runtimeconfig.dev.json
+C:\Development\ShoppingCartWeb\bin\Debug\netcoreapp1.1\ShoppingCartWeb.dll
+C:\Development\ShoppingCartWeb\bin\Debug\netcoreapp1.1\ShoppingCartWeb.pdb
+C:\Development\ShoppingCartWeb\obj\Debug\netcoreapp1.1\UserSecretsAssemblyInfo.cs
+C:\Development\ShoppingCartWeb\obj\Debug\netcoreapp1.1\ShoppingCartWeb.AssemblyInfo.cs
+C:\Development\ShoppingCartWeb\obj\Debug\netcoreapp1.1\ShoppingCartWeb.dll
+C:\Development\ShoppingCartWeb\obj\Debug\netcoreapp1.1\ShoppingCartWeb.pdb

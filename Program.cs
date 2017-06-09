@@ -16,6 +16,7 @@ namespace ShoppingCartWeb
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>()
+                .UseUrls("http://*:44307")
                 .Build();
 
             host.Run();
