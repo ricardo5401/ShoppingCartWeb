@@ -1,0 +1,77 @@
+﻿@model IEnumerable<ShoppingCartWeb.Models.Albums>
+@{
+    ViewBag.Title = "Home Page";
+}
+<div id="carousel-id" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#carousel-id" data-slide-to="0" class=""></li>
+        <li data-target="#carousel-id" data-slide-to="1" class=""></li>
+        <li data-target="#carousel-id" data-slide-to="2" class="active"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="item">
+            <img  width="100%" alt="First slide" src="https://images.pexels.com/photos/70222/pexels-photo-70222.jpeg?w=940&h=650&auto=compress&cs=tinysrgb">
+            <div class="container">
+                <div class="carousel-caption">
+                    <h1>Example headline.</h1>
+                    <p>Note: If you're viewing this page via a URL, the "next" and "previous" Glyphicon buttons on the left and right might not load/display properly due to web browser security rules.</p>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <img width="100%" alt="Second slide" src="https://images.pexels.com/photos/38295/mobile-phone-iphone-music-38295.jpeg?w=940&h=650&auto=compress&cs=tinysrgb">
+            <div class="container">
+                <div class="carousel-caption">
+                    <h1>Another example headline.</h1>
+                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="item active">
+            <img width="100%" alt="Third slide" src="https://images.pexels.com/photos/6399/woman-girl-technology-music.jpg?w=940&h=650&auto=compress&cs=tinysrgb">
+            <div class="container">
+                <div class="carousel-caption">
+                    <h1>One more for good measure.</h1>
+                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+    <a class="left carousel-control" href="#carousel-id" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+    <a class="right carousel-control" href="#carousel-id" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+</div>
+
+<style>
+    .titulodescripcion {
+        color: red;
+        font-weight: bold;
+    }
+</style>
+<br/>
+
+<div class="container row">
+    
+    @foreach (var item in Model)
+    {
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+            <div class="image">
+                <a href='@Url.Action("MostrarDetalle","Album",new {id= @item.AlbumId})'> <img src="@item.AlbumArtUrl" class="img-responsive" alt="Image"> <a>
+            </div>
+            <div class="descripcion">
+                 <p> <span class="titulodescripcion">@item.Title</span><img src="https://cdn0.iconfinder.com/data/icons/typicons-2/24/shopping-cart-128.png" width="32px" alt="add to shopping cart" />
+                     @Html.ActionLink("Add to cart", "AddToCart", "ShoppingCarts", new { id = @item.AlbumId }, "")</p>
+                 <p><strong>Precio: </strong>@item.Price soles</p>
+                <p class="contenido">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat optio ratione sed vel beatae, alias, officiis odit laboriosam rem. Aliquid quibusdam deleniti dignissimos, odit atque facere libero nesciunt, dolorum natus.
+                </p>
+
+            </div>
+
+        </div>
+
+    }
+
+</div>
