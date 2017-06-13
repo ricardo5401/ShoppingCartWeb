@@ -5,8 +5,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ShoppingCartWeb.Models;
+using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using Newtonsoft.Json;
+using ShoppingCartWeb.Helpers;
+using ShoppingCartWeb.Network;
 
 namespace ShoppingCartWeb.Controllers
 {
@@ -15,13 +19,14 @@ namespace ShoppingCartWeb.Controllers
         public IActionResult Index()
         {
             var httpClient = new HttpClient();
-            
-                var response = httpClient.GetAsync("http://localhost:5001/api/albums").Result;
-                var result = response.Content.ReadAsStringAsync().Result;
+            httpClient.DefaultRequestHeaders.Authorization = 
+            new AuthenticationHeaderValue("Bearer", TokenManager.RequestToken());
 
-                
-                Console.WriteLine(result);
-                IEnumerable<Albums> user = JsonConvert.DeserializeObject<IEnumerable<Albums>>(result);
+            var response = httpClient.GetAsync(ShoppingCartAPI.AlbumURL).Result;
+            var result = response.Content.ReadAsStringAsync().Result;
+
+            Console.WriteLine(result);
+            IEnumerable<Albums> user = JsonConvert.DeserializeObject<IEnumerable<Albums>>(result);
                 
             return View(user);
         }

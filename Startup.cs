@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Identity;
 using ShoppingCartWeb.Data;
 using ShoppingCartWeb.Models;
 using ShoppingCartWeb.Services;
+using ShoppingCartWeb.Extensions;
 using Npgsql.EntityFrameworkCore.PostgreSQL;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Facebook;
