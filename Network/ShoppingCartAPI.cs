@@ -7,5 +7,6 @@ namespace ShoppingCartWeb.Network
         public static string SigningKey = "cc4435685b40b2e9ddcb357fd79423b2d8e293b897d86f5336cb61c5fd31c9a3";
         public static string BaseApiURL = "http://localhost:5001";
         public static string AlbumURL = BaseApiURL + "/api/Albums";
+        public static string ArtistURL = BaseApiURL + "/api/Artists";
     }
 }
