@@ -15,11 +15,11 @@ namespace ShoppingCartWeb.Repositories
             try
             {
                 var result = RequestHelper.Post(ShoppingCartAPI.ArtistURL, b);
-                Console.WriteLine("Album post result: " + result);
+                Console.WriteLine("Artist post result: " + result);
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error en post album: " + ex.Message);
+                Console.WriteLine("Error en post Artist: " + ex.Message);
             }
         }
 
@@ -28,11 +28,11 @@ namespace ShoppingCartWeb.Repositories
             try
             {
                 var result = RequestHelper.Delete(ShoppingCartAPI.ArtistURL + "/" + id.ToString());
-                Console.WriteLine("Album delete result: " + result);
+                Console.WriteLine("Artist delete result: " + result);
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error en delete album: " + ex.Message);
+                Console.WriteLine("Error en delete Artist: " + ex.Message);
             }
         }
 
@@ -45,7 +45,7 @@ namespace ShoppingCartWeb.Repositories
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error en get album: " + ex.Message);
+                Console.WriteLine("Error en get Artist: " + ex.Message);
                 return null;
             }
         }
@@ -59,7 +59,7 @@ namespace ShoppingCartWeb.Repositories
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error en get albums: " + ex.Message);
+                Console.WriteLine("Error en get Artists: " + ex.Message);
                 return new List<Artist>();
             }
         }
@@ -70,11 +70,11 @@ namespace ShoppingCartWeb.Repositories
             {
                 string url = ShoppingCartAPI.ArtistURL + "/" + b.ArtistId.ToString();
                 var result = RequestHelper.Put(url, b);
-                Console.WriteLine("Album update result: " + result);
+                Console.WriteLine("Artist update result: " + result);
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error en update album: " + ex.Message);
+                Console.WriteLine("Error en update Artist: " + ex.Message);
             }
         }
     }

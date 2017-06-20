@@ -8,9 +8,9 @@ namespace ShoppingCartWeb.Network
         public static string BaseApiURL = "http://localhost:5001";
         public static string AlbumURL = BaseApiURL + "/api/Albums";
         public static string ArtistURL = BaseApiURL + "/api/Artists";
-        public static string GenretURL = BaseApiURL + "/api/Genres";
-        public static string CarttURL = BaseApiURL + "/api/Carts";
-        public static string OrdertURL = BaseApiURL + "/api/Orders";
-        public static string OrderDetailtURL = BaseApiURL + "/api/OrderDetails";
+        public static string GenreURL = BaseApiURL + "/api/Genres";
+        public static string CartURL = BaseApiURL + "/api/Carts";
+        public static string OrderURL = BaseApiURL + "/api/Orders";
+        public static string OrderDetailURL = BaseApiURL + "/api/OrderDetails";
     }
 }
