@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace ShoppingCartWeb.Models
 {
-    public partial class Albums
+    public class Album
     {
-        public Albums()
+        public Album()
         {
 
         }

@@ -27,3 +27,12 @@ C:\Development\ShoppingCartWeb\obj\Debug\netcoreapp1.1\UserSecretsAssemblyInfo.c
 C:\Development\ShoppingCartWeb\obj\Debug\netcoreapp1.1\ShoppingCartWeb.AssemblyInfo.cs
 C:\Development\ShoppingCartWeb\obj\Debug\netcoreapp1.1\ShoppingCartWeb.dll
 C:\Development\ShoppingCartWeb\obj\Debug\netcoreapp1.1\ShoppingCartWeb.pdb
+C:\Users\RICHI\Documents\Visual Studio 2017\Projects\ShoppingCartWeb\bin\Debug\netcoreapp1.1\ShoppingCartWeb.deps.json
+C:\Users\RICHI\Documents\Visual Studio 2017\Projects\ShoppingCartWeb\bin\Debug\netcoreapp1.1\ShoppingCartWeb.runtimeconfig.json
+C:\Users\RICHI\Documents\Visual Studio 2017\Projects\ShoppingCartWeb\bin\Debug\netcoreapp1.1\ShoppingCartWeb.runtimeconfig.dev.json
+C:\Users\RICHI\Documents\Visual Studio 2017\Projects\ShoppingCartWeb\bin\Debug\netcoreapp1.1\ShoppingCartWeb.dll
+C:\Users\RICHI\Documents\Visual Studio 2017\Projects\ShoppingCartWeb\bin\Debug\netcoreapp1.1\ShoppingCartWeb.pdb
+C:\Users\RICHI\Documents\Visual Studio 2017\Projects\ShoppingCartWeb\obj\Debug\netcoreapp1.1\UserSecretsAssemblyInfo.cs
+C:\Users\RICHI\Documents\Visual Studio 2017\Projects\ShoppingCartWeb\obj\Debug\netcoreapp1.1\ShoppingCartWeb.AssemblyInfo.cs
+C:\Users\RICHI\Documents\Visual Studio 2017\Projects\ShoppingCartWeb\obj\Debug\netcoreapp1.1\ShoppingCartWeb.dll
+C:\Users\RICHI\Documents\Visual Studio 2017\Projects\ShoppingCartWeb\obj\Debug\netcoreapp1.1\ShoppingCartWeb.pdb
