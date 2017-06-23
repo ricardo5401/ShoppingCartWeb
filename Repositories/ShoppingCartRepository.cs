@@ -5,7 +5,8 @@ using System.Data;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
-
+using ShoppingCartWeb.Helpers;
+using ShoppingCartWeb.ViewModels;
 
 namespace ShoppingCartWeb.Repositories
 {
@@ -16,7 +17,7 @@ namespace ShoppingCartWeb.Repositories
         public static ShoppingCartRepository GetCart(HttpContext context)
         {
             var cart = new ShoppingCartRepository();
-            cart.ShoppingCartId = cart.GetCartId(context);
+            cart.ShoppingCartId = SessionHelper.GetShoppingCartId(context);
             return cart;
         }
         // Helper method to simplify shopping cart calls
@@ -26,33 +27,16 @@ namespace ShoppingCartWeb.Repositories
         }
         public void AddToCart(Album album)
         {
-            /*
-            // Get the matching cart and album instances
-            var cartItem = storeDB.Carts.SingleOrDefault(
-                c => c.CartId == ShoppingCartId
-                && c.AlbumId == album.AlbumId);
-
-            if (cartItem == null)
+            CartViewModel cart = new CartViewModel
             {
-                // Create a new cart item if no cart item exists
-                cartItem = new Cart
-                {
-                    AlbumId = album.AlbumId,
-                    CartId = ShoppingCartId,
-                    Count = 1,
-                    DateCreated = DateTime.Now
-                };
-                storeDB.Carts.Add(cartItem);
-            }
-            else
-            {
-                // If the item does exist in the cart, 
-                // then add one to the quantity
-                cartItem.Count++;
-            }
-            // Save changes
-            storeDB.SaveChanges();
-             */
+                CartId = "",
+                AlbumId = 1,
+                GenreId = 1,
+                ArtistId = 1,
+                Title = "",
+                Price = 1,
+                ShoppingCartId = ""
+            };
         }
         public int RemoveFromCart(int id)
         {
@@ -196,22 +180,6 @@ namespace ShoppingCartWeb.Repositories
             return order.OrderId;
             */
             return 0;
-        }
-        // We're using HttpContextBase to allow access to cookies.
-        public string GetCartId(HttpContext context)
-        {
-            var key = context.Session.GetString("CartId");
-            if (string.IsNullOrEmpty(key))
-            {
-                if (!string.IsNullOrWhiteSpace(context.User.Identity.Name))
-                    key = context.User.Identity.Name;
-                else
-                    // Generate a new random GUID using System.Guid class
-                    key = Guid.NewGuid().ToString();
-                // save the cardId  
-                context.Session.SetString("CartId", key);
-            }
-            return key;
         }
         // When a user has logged in, migrate their shopping cart to
         // be associated with their username

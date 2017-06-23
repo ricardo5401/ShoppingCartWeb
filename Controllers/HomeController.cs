@@ -20,7 +20,7 @@ namespace ShoppingCartWeb.Controllers
     {
         public IActionResult Index()
         {
-            var key = HomeController.GetShoppingCartId(HttpContext);
+            var key = SessionHelper.GetShoppingCartId(HttpContext);
             Console.WriteLine(key);
             var albumRepository =  new AlbumRepository();             
             return View(albumRepository.GetAll());
@@ -42,17 +42,6 @@ namespace ShoppingCartWeb.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = HttpContext.TraceIdentifier });
-        }
-
-        public static string GetShoppingCartId(HttpContext context)
-        {
-            var key = context.Session.GetString("CartId");
-            if (string.IsNullOrEmpty(key))
-            {
-                key = context.Session.Id;
-                context.Session.SetString("CartId", key);
-            }
-            return key;
         }
     }
 }
