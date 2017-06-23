@@ -16,8 +16,18 @@ namespace ShoppingCartWeb.Controllers
     {
         public IActionResult Index()
         {          
+            CartRepository repositoryCart = new CartRepository();
+            Console.WriteLine(repositoryCart.GetAll());
+            return View(repositoryCart.GetAll());
+        }
+        public IActionResult AddToCart(int id)
+        {
+            CartRepository repositoryCart = new CartRepository();
+            Cart b= new Cart();
+            b.AlbumId= id;
+            repositoryCart.Add(b);
 
-            return View("Index");
+            return RedirectToAction("Index","Home");
         }
 
         // GET: Carts/Create
