@@ -1,0 +1,9 @@
+/Users/Admin/Development/ShoppingCartWeb/bin/Debug/netcoreapp1.1/ShoppingCartWeb.deps.json
+/Users/Admin/Development/ShoppingCartWeb/bin/Debug/netcoreapp1.1/ShoppingCartWeb.runtimeconfig.json
+/Users/Admin/Development/ShoppingCartWeb/bin/Debug/netcoreapp1.1/ShoppingCartWeb.runtimeconfig.dev.json
+/Users/Admin/Development/ShoppingCartWeb/bin/Debug/netcoreapp1.1/ShoppingCartWeb.dll
+/Users/Admin/Development/ShoppingCartWeb/bin/Debug/netcoreapp1.1/ShoppingCartWeb.pdb
+/Users/Admin/Development/ShoppingCartWeb/obj/Debug/netcoreapp1.1/UserSecretsAssemblyInfo.cs
+/Users/Admin/Development/ShoppingCartWeb/obj/Debug/netcoreapp1.1/ShoppingCartWeb.AssemblyInfo.cs
+/Users/Admin/Development/ShoppingCartWeb/obj/Debug/netcoreapp1.1/ShoppingCartWeb.dll
+/Users/Admin/Development/ShoppingCartWeb/obj/Debug/netcoreapp1.1/ShoppingCartWeb.pdb
