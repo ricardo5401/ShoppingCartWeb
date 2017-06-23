@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ShoppingCartWeb.Models;
+using Microsoft.AspNetCore.Http;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -19,6 +20,13 @@ namespace ShoppingCartWeb.Controllers
     {
         public IActionResult Index()
         {
+            var key = HttpContext.Session.GetString("CartId");
+            if (string.IsNullOrEmpty(key))
+            {
+                key = HttpContext.Session.Id;
+                HttpContext.Session.SetString("CartId", key);
+            }
+            Console.WriteLine(key);
             var albumRepository =  new AlbumRepository();             
             return View(albumRepository.GetAll());
         }
