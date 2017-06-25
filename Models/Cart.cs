@@ -10,5 +10,9 @@ namespace ShoppingCartWeb.Models
         public int Count { get; set; }
         public DateTime DateCreated { get; set; }
         public virtual Album Album { get; set; }
+        public Album GetAlbum()
+        {
+            return new ShoppingCartWeb.Repositories.AlbumRepository().Get(this.AlbumId);
+        }
     }
 }

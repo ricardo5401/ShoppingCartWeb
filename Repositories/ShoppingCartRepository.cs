@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using ShoppingCartWeb.Helpers;
 using ShoppingCartWeb.ViewModels;
+using ShoppingCartWeb.Network;
+using Newtonsoft.Json;
 
 namespace ShoppingCartWeb.Repositories
 {
@@ -29,40 +31,32 @@ namespace ShoppingCartWeb.Repositories
         {
             CartViewModel cart = new CartViewModel
             {
-                CartId = "",
-                AlbumId = 1,
-                GenreId = 1,
-                ArtistId = 1,
-                Title = "",
-                Price = 1,
-                ShoppingCartId = ""
+                AlbumId = album.AlbumId,
+                GenreId = album.GenreId,
+                ArtistId = album.ArtistId,
+                Title = album.Title,
+                Price = album.Price,
+                CartId = ShoppingCartId
             };
+            var response = RequestHelper.Post(ShoppingCartAPI.AddToCartURL, cart);
+            Console.WriteLine("AddToCart response: " + response);
         }
-        public int RemoveFromCart(int id)
+        public ShoppingCartRemoveViewModel RemoveFromCart(int id)
         {
-            int itemCount = 0;
-            /* 
-            // Get the cart
-            var cartItem = storeDB.Carts.Single(
-                cart => cart.CartId == ShoppingCartId
-                && cart.RecordId == id);
-
-            if (cartItem != null)
+            CartDeleteViewModel cart = new CartDeleteViewModel
             {
-                if (cartItem.Count > 1)
-                {
-                    cartItem.Count--;
-                    itemCount = cartItem.Count;
-                }
-                else
-                {
-                    storeDB.Carts.Remove(cartItem);
-                }
-                // Save changes
-                storeDB.SaveChanges();
-            }
-            */
-            return itemCount;
+                ShoppingCartId = this.ShoppingCartId,
+                RecordId = id
+            };
+            var result = RequestHelper.Post(ShoppingCartAPI.RemoveFromCartURL, cart);
+            return JsonConvert.DeserializeObject<ShoppingCartRemoveViewModel>(result);
+        }
+
+        public int GetCount()
+        {
+            var url = ShoppingCartAPI.ShoppingCartURL + "/?ShoppingCartId=" + this.ShoppingCartId;
+            var result = RequestHelper.Get(url);
+            return Int32.Parse(result);
         }
         public void EmptyCart()
         {
@@ -78,41 +72,13 @@ namespace ShoppingCartWeb.Repositories
             storeDB.SaveChanges();
             */
         }
-        public List<Cart> GetCartItems()
+        public ShoppingCartViewModel GetCartItems(string ShoppingCartId)
         {
-            /*
-            return storeDB.Carts.Where(
-                cart => cart.CartId == ShoppingCartId).ToList();
-            */
-            return new List<Cart>();
+            var response = RequestHelper.Get(ShoppingCartAPI.ShoppingCartURL + "/" + ShoppingCartId);
+            Console.WriteLine("GetCartItems result: " + response);
+            return JsonConvert.DeserializeObject<ShoppingCartViewModel>(response);;
         }
-        public int GetCount()
-        {
-            /* 
-            // Get the count of each item in the cart and sum them up
-            int? count = (from cartItems in storeDB.Carts
-                          where cartItems.CartId == ShoppingCartId
-                          select (int?)cartItems.Count).Sum();
-            // Return 0 if all entries are null
-            return count ?? 0;
-            */
-            return 0;
-        }
-        public decimal GetTotal()
-        {
-            /* 
-            // Multiply album price by count of that album to get 
-            // the current price for each of those albums in the cart
-            // sum all album price totals to get the cart total
-            decimal? total = (from cartItems in storeDB.Carts
-                              where cartItems.CartId == ShoppingCartId
-                              select (int?)cartItems.Count *
-                              cartItems.Album.Price).Sum();
 
-            return total ?? decimal.Zero;
-            */
-            return 0;
-        }
         public int CreateOrder(Order order)
         {
             /* 

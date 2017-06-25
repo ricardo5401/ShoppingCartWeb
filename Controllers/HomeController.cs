@@ -21,7 +21,7 @@ namespace ShoppingCartWeb.Controllers
         public IActionResult Index()
         {
             var key = SessionHelper.GetShoppingCartId(HttpContext);
-            Console.WriteLine(key);
+            Console.WriteLine("HomeController Index - CartId: " + key);
             var albumRepository =  new AlbumRepository();             
             return View(albumRepository.GetAll());
         }
