@@ -76,75 +76,26 @@ namespace ShoppingCartWeb.Repositories
         {
             var response = RequestHelper.Get(ShoppingCartAPI.ShoppingCartURL + "/" + ShoppingCartId);
             Console.WriteLine("GetCartItems result: " + response);
-            return JsonConvert.DeserializeObject<ShoppingCartViewModel>(response);;
+            return JsonConvert.DeserializeObject<ShoppingCartViewModel>(response);
         }
 
-        public int CreateOrder(Order order)
+        public Order CreateOrder(Order order)
         {
-            /* 
-            decimal orderTotal = 0;
-
-            var cartItems = GetCartItems();
-
-            foreach (var item in cartItems)
+            var URL = ShoppingCartAPI.AddressAndPaymentURL + "?ShoppingCartId=" + ShoppingCartId;
+            var response = RequestHelper.Post(URL, order);
+            try
             {
-                var orderDetail = new OrderDetail
-                {
-                    AlbumId = item.AlbumId,
-                    OrderId = order.OrderId,
-                    UnitPrice = item.Album.Price,
-                    Quantity = item.Count
-                };
-
-                orderTotal += (item.Count * item.Album.Price);
-
-                storeDB.OrderDetails.Add(orderDetail);
-
+                Console.WriteLine("Create order successfull");
+                return JsonConvert.DeserializeObject<Order>(response);
             }
-
-            order.Total = orderTotal;
-            storeDB.Orders.Attach(order);
-            storeDB.Entry(order).State = EntityState.Modified;
-
-            // Save the order
-            storeDB.SaveChanges();
-            // Empty the shopping cart
-            EmptyCart();
-            // Return the OrderId as the confirmation number
-            return order.OrderId;
-            */
-            return 0;
+            catch(Exception ex)
+            {
+                Console.WriteLine("Error on create order, error message: " + ex.Message);
+                return null;
+            }
         }
         public int CreateOrder(Order order, String PromoCode)
         {
-            /* 
-            decimal orderTotal = 0;
-
-            var cartItems = GetCartItems();
-
-            foreach (var item in cartItems)
-            {
-                var orderDetail = new OrderDetail
-                {
-                    AlbumId = item.AlbumId,
-                    OrderId = order.OrderId,
-                    UnitPrice = item.Album.Price,
-                    Quantity = item.Count
-                };
-
-                orderTotal += (item.Count * item.Album.Price);
-
-                storeDB.OrderDetails.Add(orderDetail);
-
-            }
-            // with PromoCode total price = 0
-            // Save the orderDetails
-            storeDB.SaveChanges();
-            // Empty the shopping cart
-            EmptyCart();
-            // Return the OrderId as the confirmation number
-            return order.OrderId;
-            */
             return 0;
         }
         // When a user has logged in, migrate their shopping cart to
