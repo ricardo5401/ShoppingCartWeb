@@ -19,4 +19,9 @@ namespace ShoppingCartWeb.ViewModels
         public string ShoppingCartId { get; set; }
         public int RecordId { get; set; }
     }
+    public class MigrateCardViewModel
+    {
+        public string OldCartId { get; set; }
+        public string CartId { get; set; }
+    }
 }

@@ -81,11 +81,17 @@ namespace ShoppingCartWeb.Repositories
 
         public Order CreateOrder(Order order)
         {
-            var URL = ShoppingCartAPI.AddressAndPaymentURL + "?ShoppingCartId=" + ShoppingCartId;
-            var response = RequestHelper.Post(URL, order);
+            var URL = ShoppingCartAPI.AddressAndPaymentURL;
+            var orderVM = new OrderViewModel
+            {
+                order = order,
+                shoppingCartId = this.ShoppingCartId,
+                promoCode = ""
+            };
+            var response = RequestHelper.Post(URL, orderVM);
             try
             {
-                Console.WriteLine("Create order successfull");
+                Console.WriteLine("Create order result: " + response);
                 return JsonConvert.DeserializeObject<Order>(response);
             }
             catch(Exception ex)
@@ -100,18 +106,15 @@ namespace ShoppingCartWeb.Repositories
         }
         // When a user has logged in, migrate their shopping cart to
         // be associated with their username
-        public void MigrateCart(string userName)
+        public void MigrateCart(string currentCartId, string userName)
         {
-            /*
-            var shoppingCart = storeDB.Carts.Where(
-                c => c.CartId == ShoppingCartId);
-
-            foreach (Cart item in shoppingCart)
+            var model = new MigrateCardViewModel
             {
-                item.CartId = userName;
-            }
-            storeDB.SaveChanges();
-            */
+                OldCartId = currentCartId,
+                CartId = userName
+            };
+            var response = RequestHelper.Post(ShoppingCartAPI.MigrateCartURL, model);
+            Console.WriteLine("Migrate result: " + response);
         }
     }
 }

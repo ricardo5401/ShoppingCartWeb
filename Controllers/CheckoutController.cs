@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Owin;
 using ShoppingCartWeb.Extensions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using ShoppingCartWeb.Helpers;
 
 namespace ShoppingCartWeb.Controllers
 {
@@ -26,11 +27,14 @@ namespace ShoppingCartWeb.Controllers
         {
             _userManager = userManager;
         }
-        
+
         [HttpGet]
         public async Task<ActionResult> AddressAndPayment()
         {
+            Console.WriteLine("AddresPaymet - New Order");
             var user = await _userManager.GetUserAsync(HttpContext.User);
+            // check to migrate
+            CheckCartId(user.UserName);
             Order order = new Order();
             if (user != null)
             {
@@ -42,26 +46,49 @@ namespace ShoppingCartWeb.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddressAndPayment([FromBody] Order orderVM)
+        public ActionResult AddressAndPayment(Order orderVM)
         {
-            if(ModelState.IsValid)
+            Console.WriteLine("AddresPaymet - Checking model state");
+            if (ModelState.IsValid)
             {
                 var cart = ShoppingCartRepository.GetCart(HttpContext);
                 var order = cart.CreateOrder(orderVM);
 
                 if (order != null)
+                {
+                    Console.WriteLine("AddresPaymet - Created with OrderId: " + order.OrderId);
                     return RedirectToAction("Complete", new { id = order.OrderId });
+                }
                 else
+                {
+                    Console.WriteLine("AddresPaymet - Order Rejected, check API logs");
                     return View(orderVM);
+                }
             }
             else
+            {
+                Console.WriteLine("AddresPaymet - Invalid Model");
                 return View(orderVM);
+            }
         }
 
         // GET: /Checkout/Complete
         public ActionResult Complete(int id)
         {
+            Console.WriteLine("Complete order, OrderId: " + id);
             return View(id);
+        }
+
+        private void CheckCartId(string UserName)
+        {
+            Console.WriteLine("Checking CartId");
+            var currentCartId = SessionHelper.GetShoppingCartId(HttpContext);
+            if (currentCartId != UserName)
+            {
+                SessionHelper.SetShoppingCartId(HttpContext, UserName);
+                var cart = ShoppingCartRepository.GetCart(HttpContext);
+                cart.MigrateCart(currentCartId, UserName);
+            }
         }
     }
 }

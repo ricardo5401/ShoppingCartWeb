@@ -4,8 +4,7 @@
     ViewBag.Title = "Address And Payment";
 }
 
-@using (Html.BeginForm())
-{
+<form asp-controller="Checkout" asp-action="AddressAndPayment" method="post">
     <div class="row">
         <h2>Address And Payment</h2>
         <hr/>
@@ -86,19 +85,6 @@
         </div>
 
     </fieldset>
-    <fieldset>
-        <legend>Payment</legend>
-        <p>
-            We're running a promotion: all music is free
-            with the promo code: "FREE"
-        </p>
-        <div class="editor-label">
-            @Html.Label("Promo Code")
-        </div>
-        <div class="editor-field">
-            <input type="text" class="form-control" name="PromoCode" id="PromoCode" />
-        </div>
-    </fieldset>
     <br />
-    <input type="submit" class="btn btn-primary" value="Submit Order" />
-}
+    <button  type="submit" class="btn btn-primary">Submit Order</button>
+</form>

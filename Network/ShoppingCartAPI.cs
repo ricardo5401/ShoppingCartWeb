@@ -15,6 +15,7 @@ namespace ShoppingCartWeb.Network
         public static string ShoppingCartURL = BaseApiURL + "/api/ShoppingCarts";
         public static string AddToCartURL = ShoppingCartURL + "/AddToCart";
         public static string RemoveFromCartURL = ShoppingCartURL + "/RemoveFromCart";
-        public static string AddressAndPaymentURL = BaseApiURL + "/Checkout/AddressAndPayment";
+        public static string AddressAndPaymentURL = BaseApiURL + "/api/Checkout/AddressAndPayment";
+        public static string MigrateCartURL = BaseApiURL + "/api/Checkout/AddressAndPayment";
     }
 }
