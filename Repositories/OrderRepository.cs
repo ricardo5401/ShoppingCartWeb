@@ -64,6 +64,35 @@ namespace ShoppingCartWeb.Repositories
             }
         }
 
+        public IEnumerable<Order> GetAll(string ShoppingCartId)
+        {
+            try
+            {
+                var result = RequestHelper.Get(ShoppingCartAPI.OrderURL + "/" + ShoppingCartId);
+                return JsonConvert.DeserializeObject<IEnumerable<Order>>(result);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error en get Order: " + ex.Message);
+                return new List<Order>();
+            }
+        }
+
+        public IEnumerable<OrderDetail> GetDetails(int id)
+        {
+
+            try
+            {
+                var result = RequestHelper.Get(ShoppingCartAPI.OrderURL + "/Details/" + id);
+                return JsonConvert.DeserializeObject<IEnumerable<OrderDetail>>(result);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error en get Order: " + ex.Message);
+                return new List<OrderDetail>();
+            }
+        }
+
         public void Update(Order b)
         {
             try

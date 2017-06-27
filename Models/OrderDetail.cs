@@ -1,3 +1,4 @@
+using ShoppingCartWeb.Repositories;
 namespace ShoppingCartWeb.Models
 {
     public class OrderDetail
@@ -8,6 +9,10 @@ namespace ShoppingCartWeb.Models
         public int Quantity { get; set; }
         public decimal UnitPrice { get; set; }
         public virtual Album Album { get; set; }
+        public Album GetAlbum()
+        {
+            return new AlbumRepository().Get(this.AlbumId);
+        }
         public virtual Order Order { get; set; }
     }
 }
