@@ -9,7 +9,7 @@
 <form asp-controller="Checkout" asp-action="AddressAndPayment" method="post" id="formCheckout">
     <div class="row">
         <h2>Address And Payment</h2>
-        <hr/>
+        <hr />
     </div>
     <fieldset>
         <legend>Shipping Information</legend>
@@ -87,26 +87,26 @@
         </div>
 
     </fieldset>
-    <br />
 
-    <form action="/ShoppingCarts/Payment" method="POST" id="cardPayment">
-        <script src="//checkout.stripe.com/v2/checkout.js"
-                class="stripe-button"
-                data-key="@Stripe.Value.PublishableKey"
-                data-locale="auto"
-                data-description="Submit Order"
-                data-amount=@( "00")>
-        </script>
-        <input type="hidden" id="monto" name="monto" value="@(  "00")" />
-    </form>
-    <button  type="submit" class="btn btn-primary" id="submit">Submit Order</button>
+    <button type="submit" class="btn btn-primary" id="submit">Submit Order</button>
 </form>
+
+<form action="@Url.Action("Payment","Checkout")" method="POST">
+    <script src="//checkout.stripe.com/v2/checkout.js"
+            class="stripe-button"
+            data-key="@Stripe.Value.PublishableKey"
+            data-locale="auto"
+            data-description="Pago Con Tarjeta"
+            data-amount=@(Model.Total+ "00")>
+    </script>
+    <input type="hidden" id="monto" name="monto" value="@(Model.Total + "00")" />
+</form>
+
 
 <style>
     #submit{
         z-index: 999999999;
         position: absolute;
-        margin-top: -34px;
     }
 </style>
 
@@ -114,8 +114,23 @@
     $(document).ready(function(){
         $("#submit").on("click", function (e){
             e.preventDefault();
+            submitOrder()
             console.log("submit")
             $(".stripe-button-el").click()
         });
     })
+    function submitOrder(){
+        var datastring = $("#formCheckout").serialize();
+        $.ajax({
+            type: "POST",
+            url: "/Checkout/AddressAndPayment",
+            data: datastring,
+            success: function(data) {
+               console.log(data)
+            },
+            error: function() {
+                console.log('error handing here');
+            }
+        });
+    }
 </script>

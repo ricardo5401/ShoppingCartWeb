@@ -34,9 +34,22 @@ namespace ShoppingCartWeb.Controllers
         {
             Console.WriteLine("AddresPaymet - New Order");
             var user = await _userManager.GetUserAsync(HttpContext.User);
+            
+
+            var cart = ShoppingCartRepository.GetCart(HttpContext);
+            var CartId = SessionHelper.GetShoppingCartId(HttpContext);
+            var items = cart.GetCartItems(CartId);
+
+            Order order = new Order();
+
+            decimal total= 0; 
+
+            foreach(var item in items.CartItems){
+                total+= item.GetAlbum().Price;
+            }
+            order.Total = total;
             // check to migrate
             CheckCartId(user.UserName);
-            Order order = new Order();
             if (user != null)
             {
                 order.Email = user.Email;
@@ -63,13 +76,13 @@ namespace ShoppingCartWeb.Controllers
                 else
                 {
                     Console.WriteLine("AddresPaymet - Order Rejected, check API logs");
-                    return View(orderVM);
+                    return Ok(orderVM);
                 }
             }
             else
             {
                 Console.WriteLine("AddresPaymet - Invalid Model");
-                return View(orderVM);
+                return Ok(orderVM);
             }
         }
 
@@ -102,7 +115,7 @@ namespace ShoppingCartWeb.Controllers
             });
 
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Home");
         }
 
         private void CheckCartId(string UserName)
