@@ -14,6 +14,7 @@ using ShoppingCartWeb.Extensions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ShoppingCartWeb.Helpers;
+using Stripe;
 
 namespace ShoppingCartWeb.Controllers
 {

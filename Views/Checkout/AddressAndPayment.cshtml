@@ -6,7 +6,7 @@
     ViewBag.Title = "Address And Payment";
 }
 
-<form asp-controller="Checkout" asp-action="AddressAndPayment" method="post">
+<form asp-controller="Checkout" asp-action="AddressAndPayment" method="post" id="formCheckout">
     <div class="row">
         <h2>Address And Payment</h2>
         <hr/>
@@ -89,15 +89,33 @@
     </fieldset>
     <br />
 
-    <form action="/ShoppingCarts/Payment" method="POST">
+    <form action="/ShoppingCarts/Payment" method="POST" id="cardPayment">
         <script src="//checkout.stripe.com/v2/checkout.js"
                 class="stripe-button"
                 data-key="@Stripe.Value.PublishableKey"
                 data-locale="auto"
-                data-description="Pago Con Tarjeta"
+                data-description="Submit Order"
                 data-amount=@( "00")>
         </script>
         <input type="hidden" id="monto" name="monto" value="@(  "00")" />
     </form>
-    <button  type="submit" class="btn btn-primary">Submit Order</button>
+    <button  type="submit" class="btn btn-primary" id="submit">Submit Order</button>
 </form>
+
+<style>
+    #submit{
+        z-index: 999999999;
+        position: absolute;
+        margin-top: -34px;
+    }
+</style>
+
+<script>
+    $(document).ready(function(){
+        $("#submit").on("click", function (e){
+            e.preventDefault();
+            console.log("submit")
+            $(".stripe-button-el").click()
+        });
+    })
+</script>
