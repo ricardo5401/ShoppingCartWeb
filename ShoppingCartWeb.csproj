@@ -26,6 +26,7 @@
     <PackageReference Include="Newtonsoft.Json" Version="10.0.2" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="1.1.0" />
     <PackageReference Include="SendGrid" Version="9.4.1" />
+    <PackageReference Include="Stripe.net" Version="7.2.0" />
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.0.1" />

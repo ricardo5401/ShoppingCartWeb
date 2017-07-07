@@ -1,4 +1,6 @@
 @model ShoppingCartWeb.Models.Order
+@using Microsoft.Extensions.Options
+@inject IOptions<StripeSettings> Stripe
 
 @{
     ViewBag.Title = "Address And Payment";
@@ -86,5 +88,16 @@
 
     </fieldset>
     <br />
+
+    <form action="/ShoppingCarts/Payment" method="POST">
+        <script src="//checkout.stripe.com/v2/checkout.js"
+                class="stripe-button"
+                data-key="@Stripe.Value.PublishableKey"
+                data-locale="auto"
+                data-description="Pago Con Tarjeta"
+                data-amount=@( "00")>
+        </script>
+        <input type="hidden" id="monto" name="monto" value="@(  "00")" />
+    </form>
     <button  type="submit" class="btn btn-primary">Submit Order</button>
 </form>

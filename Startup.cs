@@ -20,11 +20,18 @@ using Npgsql.EntityFrameworkCore.PostgreSQL;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Facebook;
 using Microsoft.AspNetCore.Authentication.OAuth;
+using Stripe;
 
 namespace ShoppingCartWeb
 {
+    public class StripeSettings
+    {
+        public string SecretKey { get; set; }
+        public string PublishableKey { get; set; }
+    }
     public class Startup
     {
+
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -55,10 +62,13 @@ namespace ShoppingCartWeb
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+            services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
+
             services.AddMvc();
             services.AddDistributedMemoryCache(); // Adds a default in-memory implementation of IDistributedCache
             services.AddSession();
             services.AddScoped<LogActionFilter>();
+
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
@@ -69,7 +79,9 @@ namespace ShoppingCartWeb
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            StripeConfiguration.SetApiKey(Configuration.GetSection("Stripe")["SecretKey"]);
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+
             loggerFactory.AddDebug();
 
             if (env.IsDevelopment())
