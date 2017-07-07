@@ -41,7 +41,13 @@ namespace ShoppingCartWeb.Controllers
             var items = cart.GetCartItems(CartId);
 
             Order order = new Order();
-            order.Total = items.CartTotal;
+
+            decimal total= 0; 
+
+            foreach(var item in items.CartItems){
+                total+= item.GetAlbum().Price;
+            }
+            order.Total = total;
             // check to migrate
             CheckCartId(user.UserName);
             if (user != null)
@@ -70,13 +76,13 @@ namespace ShoppingCartWeb.Controllers
                 else
                 {
                     Console.WriteLine("AddresPaymet - Order Rejected, check API logs");
-                    return View(orderVM);
+                    return Ok(orderVM);
                 }
             }
             else
             {
                 Console.WriteLine("AddresPaymet - Invalid Model");
-                return View(orderVM);
+                return Ok(orderVM);
             }
         }
 
@@ -109,7 +115,7 @@ namespace ShoppingCartWeb.Controllers
             });
 
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Home");
         }
 
         private void CheckCartId(string UserName)

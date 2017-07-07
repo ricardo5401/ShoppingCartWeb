@@ -13,11 +13,21 @@ using Newtonsoft.Json;
 using ShoppingCartWeb.Helpers;
 using ShoppingCartWeb.Repositories;
 using ShoppingCartWeb.Network;
+using ShoppingCartWeb.Filters;
+using Microsoft.Extensions.Logging;
 
 namespace ShoppingCartWeb.Controllers
 {
+    [ServiceFilter(typeof(LogActionFilter))]
     public class HomeController : Controller
     {
+        
+        private readonly ILogger _logger;
+
+        public HomeController(ILoggerFactory loggerFactory){
+            _logger = loggerFactory.CreateLogger("HomeController");
+        }
+        
         public IActionResult Index()
         {
             var key = SessionHelper.GetShoppingCartId(HttpContext);
