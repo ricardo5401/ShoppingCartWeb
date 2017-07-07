@@ -15,6 +15,7 @@ using ShoppingCartWeb.Data;
 using ShoppingCartWeb.Models;
 using ShoppingCartWeb.Services;
 using ShoppingCartWeb.Extensions;
+using ShoppingCartWeb.Filters;
 using Npgsql.EntityFrameworkCore.PostgreSQL;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Facebook;
@@ -57,6 +58,7 @@ namespace ShoppingCartWeb
             services.AddMvc();
             services.AddDistributedMemoryCache(); // Adds a default in-memory implementation of IDistributedCache
             services.AddSession();
+            services.AddScoped<LogActionFilter>();
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
