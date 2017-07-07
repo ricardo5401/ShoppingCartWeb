@@ -55,31 +55,7 @@ namespace ShoppingCartWeb.Controllers
             ViewData["CartCount"] = cart.GetCount();
             return PartialView("CartSummary");
         }
-        [HttpPost]
-        public ActionResult Payment(string stripeEmail, string stripeToken, string monto)
-        {
-            var customers = new StripeCustomerService();
-            var charges = new StripeChargeService();
 
-            var customer = customers.Create(new StripeCustomerCreateOptions
-            {
-                Email = stripeEmail,
-                SourceToken = stripeToken,
-
-            });
-
-            var charge = charges.Create(new StripeChargeCreateOptions
-            {
-                Amount = Convert.ToInt32(monto),
-                Description = "Sample Charge",
-                Currency = "usd",
-                CustomerId = customer.Id
-
-            });
-            borrarSesionCarrito();
-
-            return RedirectToAction("Index");
-        }
 
         public void borrarSesionCarrito()
         {
