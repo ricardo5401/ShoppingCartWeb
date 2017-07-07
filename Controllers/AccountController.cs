@@ -12,6 +12,8 @@ using Microsoft.Extensions.Options;
 using ShoppingCartWeb.Models;
 using ShoppingCartWeb.Models.AccountViewModels;
 using ShoppingCartWeb.Services;
+using ShoppingCartWeb.Data;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace ShoppingCartWeb.Controllers
 {
@@ -25,13 +27,18 @@ namespace ShoppingCartWeb.Controllers
         private readonly ILogger _logger;
         private readonly string _externalCookieScheme;
 
+        private readonly ApplicationDbContext _context;
+        private readonly RoleManager<IdentityRole> _roleManager;
+        private ApplicationDbContext context;
+
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IOptions<IdentityCookieOptions> identityCookieOptions,
             IEmailSender emailSender,
             ISmsSender smsSender,
-            ILoggerFactory loggerFactory)
+            ILoggerFactory loggerFactory, ApplicationDbContext context,
+            RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -39,6 +46,8 @@ namespace ShoppingCartWeb.Controllers
             _emailSender = emailSender;
             _smsSender = smsSender;
             _logger = loggerFactory.CreateLogger<AccountController>();
+            _context = context;
+            _roleManager = roleManager;
         }
 
         //
@@ -112,8 +121,10 @@ namespace ShoppingCartWeb.Controllers
         [AllowAnonymous]
         public IActionResult Register(string returnUrl = null)
         {
+            RegisterViewModel R = new RegisterViewModel();
+            R.getRoles(_roleManager);
             ViewData["ReturnUrl"] = returnUrl;
-            return View();
+            return View(R);
         }
 
         //

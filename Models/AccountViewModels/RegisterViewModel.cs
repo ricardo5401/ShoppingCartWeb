@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -23,5 +26,23 @@ namespace ShoppingCartWeb.Models.AccountViewModels
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [DataType(DataType.Text)]
+        [Display(Name = "Roles")]
+        [UIHint("List")]
+        public List<SelectListItem> Roles { get; set; }
+        public String Role { get; set; }
+        private UserRoles usersRoles;
+
+        public RegisterViewModel()
+        {
+            Roles = new List<SelectListItem>();
+            usersRoles = new UserRoles();
+
+        }
+        public void getRoles(RoleManager<IdentityRole> roleManager)
+        {
+            Roles = usersRoles.getRoles(roleManager);
+        }
     }
 }
